@@ -1,0 +1,27 @@
+## Images
+image:
+  registry: gcr.io
+  repository: google-samples/microservices-demo/emailservice
+  tag: v0.1.0
+  pullPolicy: Always
+  port: 8080
+  cmd: ["/bin/grpc_health_probe", "-addr=:8080"]
+
+global:
+  imageRegistry: gcr.io
+  name: emailservice
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
+
+service:
+  type: ClusterIP
+  ports:
+    - name: grpc
+      port: 5000
+      targetPort: 8080
